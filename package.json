@@ -1,0 +1,9 @@
+{
+  "name": "jovenssarados",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "pnpm --prefix ./client run dev --host",
+    "server": "pnpm --prefix ./server run dev",
+    "full": "concurrently \"pnpm --prefix ./client run dev --host\" \"pnpm --prefix ./server run dev\""
+  }
+}

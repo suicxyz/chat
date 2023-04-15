@@ -1,7 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import session from "express-session";
 import cors from "cors";
-import path from "path";
 
 import { auth } from "@config";
 

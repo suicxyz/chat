@@ -1,0 +1,9 @@
+{
+	"permissions": [
+		"[GET]/api/users/=0",
+		"[GET]/api/users/:uid=1",
+		"[GET]/api/users/=0",
+		"[GET]/api/users/:uid=1",
+		"[GET]/api/users/:uid=1"
+	]
+}
