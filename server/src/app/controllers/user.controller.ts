@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 
-import { User } from "@models";
-
 import bcjs from "bcryptjs";
+import formidable from "formidable";
+
+import { User } from "@models";
+import { toDataURL } from "src/app/utils";
 
 export default new (class UserController {
 	async list(req: Request, res: Response): Promise<Response> {
@@ -47,7 +49,29 @@ export default new (class UserController {
 			if (user)
 				throw new Error("User already exists.");
 
-			const pp = null;
+			const form = new formidable.IncomingForm();
+			let pp;
+
+			if (body.pp) {
+				form.parse(req, async (e, fields, files) => {
+					if (e)
+						throw e;
+
+					let oldPath = files.pp.filepath;
+					let newPath = `${process.env.INIT_CWD}/server/src/tmp/${Date.now()}-${files.pp.originalFilename}`;
+
+					fs.copyFileSync(oldPath, newPath);
+
+					const data = toDataURL(newPath);
+
+					setTimeout(() => {
+						fs.rmSync(oldPath);
+						fs.rmSync(newPath);
+					}, 5000);
+
+					pp = data;
+				});
+			}
 
 			user = await User.create({ username, password, email, pp });
 			user.password = undefined;

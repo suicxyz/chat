@@ -13,7 +13,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 		if (!login)
 			throw new Error("Can not conclude operation without been logged in. Please log in first.");
 
-		if (url == "/api/auth/login" && session)
+		if (url == "/api/auth/create" && session)
 			throw new Error("Session already set.");
 
 		for (let i of permissions) {

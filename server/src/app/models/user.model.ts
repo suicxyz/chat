@@ -23,7 +23,8 @@ const UserSchema = new mongoose.Schema({
 		select: false,
 	},
 	pp: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Image",
 		trim: true,
 	},
 	is_admin: {
